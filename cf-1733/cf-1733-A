@@ -1,0 +1,51 @@
+// Problem
+You are given an array 𝑎 with 𝑛 integers. You can perform the following operation at most 𝑘 times:
+
+    Choose two indices 𝑖 and 𝑗, in which 𝑖 mod 𝑘 =𝑗 mod 𝑘 (1≤𝑖<𝑗≤𝑛). Swap 𝑎𝑖and 𝑎𝑗. 
+
+After performing all operations, you have to select 𝑘 consecutive elements, and the sum of the 𝑘 elements becomes your score. Find the maximum score you can get.
+Here 𝑥 mod 𝑦 denotes the remainder from dividing 𝑥 by 𝑦.
+
+// Input
+
+The first line contains one integer 𝑡(1≤𝑡≤600) — the number of test cases.
+
+Each test case consists of two lines.
+
+The first line of each test case contains two integers 𝑛 and 𝑘 (1≤𝑘≤𝑛≤100) — the length of the array and the number in the statement above.
+
+The second line of each test case contains 𝑛 integers 𝑎1,𝑎2,…,𝑎𝑛 (0≤𝑎𝑖≤109)  — the array itself.
+
+// Solution
+#include <bits/stdc++.h>
+#define ll long long
+
+using namespace std;
+
+int main() {
+  int t;
+  cin >> t;
+  while(t--) {
+    int n, k;
+    cin >> n >> k;
+    
+    vector<ll> num(n + 1);
+    
+    for (int i = 1; i <= n; ++i) {
+      cin >> num[i];
+    }
+    
+    ll res = 0;
+    for (int i = 1; i <= k; ++i) {
+      ll max_value = 0;
+      for (int j = i; j <= n; j = j + k) {
+        max_value = max(max_value, num[j]);
+      }
+      res += max_value; 
+    }
+    
+    cout << res << endl;
+  }
+  
+  return 0;
+}
