@@ -1,0 +1,48 @@
+// Problem
+You are given 𝑛 sticks with positive integral length 𝑎1,𝑎2,…,𝑎𝑛.
+
+You can perform the following operation any number of times (possibly zero):
+
+    choose one stick, then either increase or decrease its length by 1. After each operation, all sticks should have positive lengths. 
+
+What is the minimum number of operations that you have to perform such that it is possible to select three of the 𝑛 sticks and use them without breaking to form an equilateral triangle?
+
+An equilateral triangle is a triangle where all of its three sides have the same length.
+
+// Input
+
+The first line of the input contains a single integer 𝑡 (1≤𝑡≤100) — the number of test cases. The description of the test cases follows.
+
+The first line of each test case contains a single integer 𝑛 (3≤𝑛≤300) — the number of sticks.
+
+The second line of each test case contains 𝑛 integers 𝑎1,𝑎2,…,𝑎𝑛 (1≤𝑎𝑖≤109) — the lengths of the sticks.
+
+It is guaranteed that the sum of 𝑛 over all test cases does not exceed 300.
+
+
+// Solution
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+  int t;
+  cin >> t;
+  while(t--) {
+    int n;
+    cin >> n;
+    vector<int> num(n);
+    for (int i = 0; i < n; ++i) {
+      cin >> num[i];
+    }
+    
+    sort(num.begin(), num.end());
+    
+    int res = num[2] - num[0];
+    for (int i = 0; i < n - 2; ++i) {
+      int val = num[i + 2] - num[i];
+      res = min(res, val);
+    }
+    cout << res << endl;
+  }
+}
