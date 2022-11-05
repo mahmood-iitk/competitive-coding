@@ -1,0 +1,55 @@
+// Problem
+You are given an array 𝑎 consisting of 𝑛 integers 𝑎1,𝑎2,…,𝑎𝑛. Friends asked you to make the greatest common divisor (GCD) of all numbers in the array equal to 1. In one operation, you can do the following:
+
+    Select an arbitrary index in the array 1≤𝑖≤𝑛;Make 𝑎𝑖=gcd(𝑎𝑖,𝑖), where gcd(𝑥,𝑦) denotes the GCD of integers 𝑥 and 𝑦. The cost of such an operation is 𝑛−𝑖+1.
+
+You need to find the minimum total cost of operations we need to perform so that the GCD of the all array numbers becomes equal to 1.
+
+// Input
+
+Each test consists of multiple test cases. The first line contains an integer 𝑡(1≤𝑡≤5000) — the number of test cases. The description of test cases follows.
+
+The first line of each test case contains a single integer 𝑛(1≤𝑛≤20) — the length of the array.
+
+The second line of each test case contains 𝑛 integers 𝑎1,𝑎2,…,𝑎𝑛 (1≤𝑎𝑖≤109) — the elements of the array.
+
+// Solution:
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+  int t;
+  cin >> t;
+  while (t--) {
+    int n;
+    cin >> n;
+    vector<int> numbers(n + 1);
+    for (int i = 1; i <= n; ++i) {
+      cin >> numbers[i];
+    }
+    
+    int total_gcd = numbers[1];
+    for (int i = 1; i <= n; ++i) {
+      total_gcd = __gcd(total_gcd, numbers[i]);
+    }
+    
+    if (total_gcd == 1) {
+      cout << "0\n";
+      continue;
+    }
+    
+    if (__gcd(total_gcd, n) == 1) {
+      cout << "1\n";
+      continue;
+    }
+
+    if (__gcd(total_gcd, n - 1) == 1) {
+      cout << "2\n";
+      continue;
+    }
+
+    cout << "3\n";
+  }
+  return 0;
+}
