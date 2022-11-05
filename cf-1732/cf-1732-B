@@ -1,0 +1,49 @@
+// Problem
+A binary string is a string consisting only of the characters 0 and 1. You are given a binary string 𝑠1𝑠2…𝑠𝑛. It is necessary to make this string non-decreasing in the least number of operations. In other words, each character should be not less than the previous. In one operation, you can do the following:
+
+    Select an arbitrary index 1≤𝑖≤𝑛 in the string;
+For all 𝑗≥𝑖, change the value in the 𝑗-th position to the opposite, that is, if 𝑠𝑗=1, then make 𝑠𝑗=0, and vice versa.
+
+What is the minimum number of operations needed to make the string non-decreasing?
+
+// Input
+Each test consists of multiple test cases. The first line contains an integer 𝑡(1≤𝑡≤104) — the number of test cases. The description of test cases follows.
+
+The first line of each test cases a single integer 𝑛(1≤𝑛≤105) — the length of the string.
+
+The second line of each test case contains a binary string 𝑠 of length 𝑛.
+
+It is guaranteed that the sum of 𝑛 over all test cases does not exceed 2⋅10^5.
+
+// Solution
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+  int t;
+  cin >> t;
+  while(t--) {
+    int n;
+    cin >> n;
+    string str;
+    cin >> str;
+    
+    int res = 0;
+    int ind = 0;
+    while ((ind < n) && (str[ind] == '0')) {
+      ++ind;
+    }
+    
+    ind++;
+    
+    while (ind < n) {
+      if (str[ind] != str[ind - 1]) {
+        ++res;
+      }
+      ++ind;
+    }
+    
+    cout << res << endl;
+  }
+}
