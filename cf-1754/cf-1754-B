@@ -1,0 +1,47 @@
+// Problem
+For his birthday, Kevin received the set of pairwise distinct numbers 1,2,3,…,𝑛 as a gift.
+He is going to arrange these numbers in a way such that the minimum absolute difference between two consecutive numbers be maximum possible. More formally, if he arranges numbers in order 𝑝1,𝑝2,…,𝑝𝑛, he wants to maximize the value
+min𝑖=1𝑛−1|𝑝𝑖+1−𝑝𝑖|,
+where |𝑥| denotes the absolute value of 𝑥.
+
+Help Kevin to do that.
+
+// Input
+
+Each test consists of multiple test cases. The first line contains a single integer 𝑡(1≤𝑡≤100) — the number of test cases. Description of the test cases follows.
+
+The only line of each test case contains an integer 𝑛(2≤𝑛≤1000) — the size of the set.
+
+// Output
+
+For each test case print a single line containing 𝑛 distinct integers 𝑝1,𝑝2,…,𝑝𝑛 (1≤𝑝𝑖≤𝑛) describing the arrangement that maximizes the minimum absolute difference of consecutive elements.
+
+Formally, you have to print a permutation 𝑝 which maximizes the value min𝑖=1𝑛−1|𝑝𝑖+1−𝑝𝑖|.
+If there are multiple optimal solutions, print any of them.
+
+// Solution:
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+  int t;
+  cin >> t;
+  while(t--) {
+    int n;
+    cin >> n;
+    
+    int m = n / 2;
+    
+    for (int i = m; i >= 1; i = i - 1) {
+      cout << i << " " << i + m << " ";
+    }
+    
+    if (m * 2 != n) {
+      cout << n;
+    }
+    cout << endl;
+  }
+  return 0;
+}
