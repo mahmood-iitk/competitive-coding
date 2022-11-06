@@ -1,0 +1,81 @@
+You work in the quality control department of technical support for a large company. Your job is to make sure all client issues have been resolved.
+
+Today you need to check a copy of a dialog between a client and a technical support manager. According to the rules of work, each message of the client must be followed by one or several messages, which are the answer of a support manager. However, sometimes clients ask questions so quickly that some of the manager's answers to old questions appear after the client has asked some new questions.
+
+Due to the privacy policy, the full text of messages is not available to you, only the order of messages is visible, as well as the type of each message: a customer question or a response from the technical support manager. It is guaranteed that the dialog begins with the question of the client.
+
+You have to determine, if this dialog may correspond to the rules of work described above, or the rules are certainly breached.
+
+//Input
+
+Each test contains multiple test cases. The first line contains the number of test cases 𝑡(1≤𝑡≤500). Description of the test cases follows.
+
+The first line of each test case contains one integer 𝑛 (1≤𝑛≤100) — the total number of messages in the dialog.
+
+The second line of each test case consists of 𝑛 characters "Q" and "A", describing types of messages in the dialog in chronological order. Character "Q" denotes the message with client question, and character "A" — the message with technical support manager answer. It is guaranteed that the first character in the line equals to "Q".
+
+// Output
+
+For each test case print "Yes" (without quotes) if dialog may correspond to the rules of work, or "No" (without quotes) otherwise.
+
+// Example
+// Input
+5
+4
+QQAA
+4
+QQAQ
+3
+QAA
+1
+Q
+14
+QAQQAQAAQQQAAA
+
+// Output
+Yes
+No
+Yes
+No
+Yes
+
+// Solution:
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+  int t;
+  cin >> t;
+  while (t--) {
+    int n;
+    cin >> n;
+    
+    string my_str;
+    cin >> my_str;
+    
+    int my_score = 0;
+    for (const char my_char : my_str) {
+      if (my_char == 'Q') {
+        my_score++;
+        continue;
+      }
+      if (my_char == 'A') {
+        if (my_score == 0) {
+          continue;
+        }
+        my_score--;
+      }
+    }
+    
+    if (my_score == 0) {
+      cout << "Yes" << endl;
+      continue;
+    }
+    
+    cout << "No" << endl;
+  }
+  
+  return 0;
+}
