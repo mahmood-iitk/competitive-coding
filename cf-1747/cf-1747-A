@@ -1,0 +1,38 @@
+// Problem
+You are given an array 𝑎 consisting of 𝑛 integers. You want to distribute these 𝑛 integers into two groups 𝑠1 and 𝑠2(groups can be empty) so that the following conditions are satisfied:
+
+    For each 𝑖 (1≤𝑖≤𝑛), 𝑎𝑖 goes into exactly one group. The value |𝑠𝑢𝑚(𝑠1)|−|𝑠𝑢𝑚(𝑠2)|is the maximum possible among all such ways to distribute the integers.
+
+Here 𝑠𝑢𝑚(𝑠1) denotes the sum of the numbers in the group 𝑠1, and 𝑠𝑢𝑚(𝑠2) denotes the sum of the numbers in the group 𝑠2.
+
+Determine the maximum possible value of |𝑠𝑢𝑚(𝑠1)|−|𝑠𝑢𝑚(𝑠2)|.
+
+// Input
+
+The input consists of multiple test cases. The first line contains a single integer 𝑡 (1≤𝑡≤2⋅104) — the number of test cases. The description of the test cases follows. The first line of each test case contains a single integer 𝑛 (1≤𝑛≤105)  — the length of the array 𝑎.
+
+The second line of each test case contains 𝑛 integers 𝑎1,𝑎2…𝑎𝑛 (−109≤𝑎𝑖≤109)  — elements of the array 𝑎.
+
+It is guaranteed that the sum of 𝑛 over all test cases does not exceed 2⋅105.
+
+// Output
+
+For each test case, output a single integer  — the maximum possible value of |𝑠𝑢𝑚(𝑠1)|−|𝑠𝑢𝑚(𝑠2)|.
+
+// Example
+// Input
+4
+2
+10 -10
+4
+-2 -1 11 0
+3
+2 3 2
+5
+-9 2 0 0 -4
+
+// Output
+0
+8
+7
+11
