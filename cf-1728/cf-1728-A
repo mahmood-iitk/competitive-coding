@@ -1,0 +1,92 @@
+// Problem
+There is a bag, containing colored balls. There are 𝑛 different colors of balls, numbered from 1 to 𝑛. There are cnt𝑖 balls of color 𝑖 in the bag. The total amount of balls in the bag is odd (e. g. cnt1+cnt2+⋯+cnt𝑛 is odd).
+
+In one move, you can choose two balls with different colors and take them out of the bag.
+
+At some point, all the remaining balls in the bag will have the same color. That's when you can't make moves anymore.
+
+Find any possible color of the remaining balls.
+// Input
+
+The first line contains a single integer 𝑡 (1≤𝑡≤1000) — the number of testcases.
+
+The first line of each testcase contains a single integer 𝑛(1≤𝑛≤20) — the number of colors.
+
+The second line contains 𝑛 integers cnt1,cnt2,…,cnt𝑛 (1≤cnt𝑖≤100) — the amount of balls of each color in the bag.
+
+The total amount of balls in the bag is odd (e. g. cnt1+cnt2+⋯+cnt𝑛is odd).
+
+// Output
+
+For each testcase, print a single integer — any possible color of the remaining balls, after you made some moves and can't make moves anymore.
+Example
+
+// Input
+3
+3
+1 1 1
+1
+9
+2
+4 7
+
+// Output
+3
+1
+2
+
+// Solution:
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+  int t;
+  cin >> t;
+  while (t--) {
+    int n;
+    cin >> n;
+    
+    vector<int> num(n);
+    int max_ele = 0;
+    int max_ele_ind = 0;
+    for (int i = 0; i < n; ++i) {
+      cin >> num[i];
+      if (num[i] > max_ele) {
+        max_ele = num[i];
+        max_ele_ind = i;
+      }
+    }
+    
+    cout << max_ele_ind + 1 << endl;
+    
+    // priority_queue<int> pq;
+    // for (int i = 0; i < n; ++i) {
+    //     pq.push(num[j]);
+    // }
+    
+    // cout << pq.top
+      
+    //   while (pq.size() > 1) {
+    //     int first_val = pq.top();
+    //     pq.pop();
+    //     int second_val = pq.top();
+    //     pq.pop();
+        
+    //     if (first_val != second_val) {
+    //       pq.push(first_val - second_val);
+    //     }
+    //   }
+      
+    //   if (pq.size() == 0) {
+    //     cout << i + 1 << endl;
+    //     break;
+    //   }
+
+    //   if ((pq.size() == 0) && ()) {
+    //     cout << i + 1 << endl;
+    //     break;
+    //   }
+
+  }
+}
