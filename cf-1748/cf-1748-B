@@ -1,0 +1,94 @@
+// Problem
+A non-empty digit string is diverse if the number of occurrences of each character in it doesn't exceed the number of distinct characters in it.
+
+For example:
+
+    string "7" is diverse because 7 appears in it 1 time and the number of distinct characters in it is 1;
+    string "77" is not diverse because 7 appears in it 2 times and the number of distinct characters in it is 1;
+    string "1010" is diverse because both 0 and 1 appear in it 2 times and the number of distinct characters in it is 2;
+    string "6668" is not diverse because 6 appears in it 3 times and the number of distinct characters in it is 2. 
+
+You are given a string 𝑠 of length 𝑛, consisting of only digits 0 to 9. Find how many of its 𝑛(𝑛+1)/2 substrings are diverse.
+
+A string 𝑎 is a substring of a string 𝑏 if 𝑎 can be obtained from 𝑏 by deletion of several (possibly, zero or all) characters from the beginning and several (possibly, zero or all) characters from the end.
+
+Note that if the same diverse string appears in 𝑠 multiple times, each occurrence should be counted independently. For example, there are two diverse substrings in "77" both equal to "7", so the answer for the string "77" is 2.
+
+// Input
+Each test contains multiple test cases. The first line contains a single integer 𝑡(1≤𝑡≤10^4) — the number of test cases.
+
+The first line of each test case contains a single integer 𝑛 (1≤𝑛≤10^5) — the length of the string 𝑠.
+
+The second line of each test case contains a string 𝑠 of length 𝑛. It is guaranteed that all characters of 𝑠 are digits from 0 to 9..
+
+It is guaranteed that the sum of 𝑛 over all test cases does not exceed 10^5.
+
+// Output
+For each test case print one integer — the number of diverse substrings of the given string 𝑠.
+
+// Example
+// Input
+7
+1
+7
+2
+77
+4
+1010
+5
+01100
+6
+399996
+5
+23456
+18
+789987887987998798
+
+// Output
+1
+2
+10
+12
+10
+15
+106
+
+// Solution
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+  int t;
+  cin >> t;
+  while (t--) {
+    int n;
+    cin >> n;
+    
+    string str;
+    cin >> str;
+    
+    int res = 0;
+
+    for (int i = 0; i < n; ++i) {
+      map<int, int> my_map;
+      for (int j = i; j < min(i + 100, n); ++j) {
+        // j = 0, j < 100
+                
+        my_map[str[j] - '0']++;
+        int distinct_char = my_map.size();
+        
+        int max_char_occurences = 0;
+        for (const pair<int, int>& my_pair : my_map) {
+          max_char_occurences = max(max_char_occurences, my_pair.second);
+        }
+        
+        if (distinct_char >= max_char_occurences) {
+          ++res;
+        }
+      }
+    }
+    cout << res << endl;
+  }
+  return 0;
+}
