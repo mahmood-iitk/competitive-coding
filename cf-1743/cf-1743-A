@@ -1,0 +1,67 @@
+// Problem
+Monocarp has forgotten the password to his mobile phone. The password consists of 4 digits from 0 to 9 (note that it can start with the digit 0).
+
+Monocarp remembers that his password had exactly two different digits, and each of these digits appeared exactly two times in the password. Monocarp also remembers some digits which were definitely not used in the password.
+
+You have to calculate the number of different sequences of 4 digits that could be the password for Monocarp's mobile phone (i. e. these sequences should meet all constraints on Monocarp's password).
+
+// Input
+
+The first line contains a single integer 𝑡(1≤𝑡≤200) — the number of testcases.
+
+The first line of each testcase contains a single integer 𝑛 (1≤𝑛≤8) — the number of digits for which Monocarp remembers that they were not used in the password.
+
+The second line contains 𝑛 different integers 𝑎1,𝑎2,…𝑎𝑛 (0 ≤ 𝑎𝑖 ≤ 9) representing the digits that were not used in the password. Note that the digits 𝑎1,𝑎2,…,𝑎𝑛 are given in ascending order.
+
+// Output
+
+For each testcase, print one integer — the number of different 4-digit sequences that meet the constraints.
+
+// Example
+// Input
+2
+8
+0 1 2 4 5 6 8 9
+1
+8
+
+// Output
+6
+216
+
+// Solution
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int factorial(const int n) {
+  int result = 1;
+  for (int i = 2; i <= n; ++i) {
+    result = result * i;
+  }
+  return result;
+}
+
+int main() {
+  int t;
+  cin >> t;
+  while (t--) {
+    int n;
+    cin >> n;
+    
+    for (int i = 0; i < n; ++i) {
+      int temp;
+      cin >> temp;
+    }
+    
+    int val1 = 6;
+    
+    // nC2
+    int m = 10 - n;
+    int nc2 = factorial(m) / (factorial(m-2) * factorial(2));
+    
+    cout << nc2 * val1 << endl;    
+  }
+  
+  return 0;
+}
