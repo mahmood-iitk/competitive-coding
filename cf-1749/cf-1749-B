@@ -1,0 +1,80 @@
+// Problem
+You are playing a computer game. To pass the current level, you have to kill a big horde of monsters. In this horde, there are 𝑛 monsters standing in the row, numbered from 1 to 𝑛. The 𝑖-th monster has 𝑎𝑖 health and a special "Death's Blessing" spell of strength 𝑏𝑖 attached to it.
+
+You are going to kill all of them one by one. It takes exactly ℎ seconds to kill a monster with health ℎ.
+
+When the 𝑖-th monster dies, it casts its spell that increases the health of its neighbors by 𝑏𝑖 (the neighbors of the 𝑗-th monster in the row are the monsters on places 𝑗−1 and 𝑗+1. The first and the last monsters have only one neighbor each).
+
+After each monster is killed, the row shrinks, so its former neighbors become adjacent to each other (so if one of them dies, the other one is affected by its spell). For example, imagine a situation with 4 monsters with health 𝑎=[2,6,7,3] and spells 𝑏=[3,6,0,5].
+
+What is the minimum time required to kill all monsters in the row?
+
+// Input
+
+The first line contains a single integer 𝑡(1≤𝑡≤10^4) — the number of test cases.
+
+The first line of each test case contains a single integer 𝑛(1≤𝑛≤2⋅10^5) — the number of monsters in the row.
+
+The second line contains 𝑛 integers 𝑎1,𝑎2,…,𝑎𝑛 (1≤𝑎𝑖≤10^9) — the initial health of corresponding monsters.
+
+The third line contains 𝑛 integers 𝑏1,𝑏2,…,𝑏𝑛 (0≤𝑏𝑖≤10^9), where 𝑏𝑖 is the strength of the spell for the 𝑖-th monster.
+
+It's guaranteed that the sum of 𝑛 doesn't exceed 2⋅10^5.
+
+// Output
+
+For each test case, print one integer — the minimum possible total time to kill all monsters.
+// Example
+// Input
+4
+1
+10
+0
+3
+100 1 100
+1 100 1
+4
+2 6 7 3
+3 6 0 5
+2
+1000000000 1000000000
+1000000000 1000000000
+
+// Output
+10
+203
+26
+3000000000
+
+// Solution
+#include <bits/stdc++.h>
+#define ll long long
+
+using namespace std;
+
+int main() {
+  int t;
+  cin >> t;
+  while (t--) {
+    int n;
+    cin >> n;
+    vector<ll> h(n);
+    vector<ll> b(n);
+    
+    ll sum = 0;
+    for (int i = 0; i < n; ++i) {
+      cin >> h[i];
+      sum += h[i];
+    }
+    
+    ll max_b = 0;
+    for (int i = 0; i < n; ++i) {
+      cin >> b[i];
+      sum += b[i];
+      max_b = max(max_b, b[i]);
+    }
+    
+    sum -= max_b;
+    cout << sum << endl;
+  }
+}
