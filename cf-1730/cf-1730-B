@@ -1,0 +1,110 @@
+// Problem
+𝑛 people live on the coordinate line, the 𝑖-th one lives at the point 𝑥𝑖 (1≤𝑖≤𝑛). They want to choose a position 𝑥0 to meet. The 𝑖-th person will spend |𝑥𝑖−𝑥0| minutes to get to the meeting place. Also, the 𝑖-th person needs 𝑡𝑖 minutes to get dressed, so in total he or she needs 𝑡𝑖+|𝑥𝑖−𝑥0| minutes.
+
+Here |𝑦| denotes the absolute value of 𝑦.
+
+These people ask you to find a position 𝑥0 that minimizes the time in which all 𝑛
+
+people can gather at the meeting place.
+// Input
+
+The first line contains a single integer 𝑡 (1≤𝑡≤10^3) — the number of test cases. Then the test cases follow.
+
+Each test case consists of three lines.
+
+The first line contains a single integer 𝑛 (1≤𝑛≤10^5) — the number of people.
+
+The second line contains 𝑛 integers 𝑥1,𝑥2,…,𝑥𝑛 (0≤𝑥𝑖≤10^8) — the positions of the people.
+
+The third line contains 𝑛 integers 𝑡1,𝑡2,…,𝑡𝑛 (0≤𝑡𝑖≤10^8), where 𝑡𝑖 is the time 𝑖-th person needs to get dressed.
+
+It is guaranteed that the sum of 𝑛 over all test cases does not exceed 2⋅10^5.
+// Output
+
+For each test case, print a single real number — the optimum position 𝑥0. It can be shown that the optimal position 𝑥0 is unique.
+
+Your answer will be considered correct if its absolute or relative error does not exceed 10^−6. Formally, let your answer be 𝑎, the jury's answer be 𝑏. Your answer will be considered correct if (|𝑎−𝑏|)/𝑚𝑎𝑥(1,|𝑏|) ≤ (10^−6).
+
+// Example
+// Input
+7
+1
+0
+3
+2
+3 1
+0 0
+2
+1 4
+0 0
+3
+1 2 3
+0 0 0
+3
+1 2 3
+4 1 2
+3
+3 3 3
+5 3 3
+6
+5 4 7 2 10 4
+3 2 5 1 4 6
+
+// Output
+0
+2
+2.5
+2
+1
+3
+6
+
+
+// Solution
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+  int t;
+  cin >> t;
+  while(t--) {
+    int n;
+    cin >> n;
+    vector<pair<int, int>> pos_time(n);
+    
+    for (int i = 0; i < n; ++i) {
+      cin >> pos_time[i].first;
+    }
+    
+    for (int i = 0; i < n; ++i) {
+      cin >> pos_time[i].second;
+    }
+    
+    sort(pos_time.begin(), pos_time.end());
+    
+    // if (n == 1) {
+    //   cout << pos_time[0].first << endl;
+    //   continue;
+    // }
+    
+    double time_spent = pos_time[0].second;
+    double position = pos_time[0].first;
+    for (int i = 1; i < n; ++i) {
+      double at_least_time_needed = pos_time[i].second - time_spent;
+      if (at_least_time_needed > 0.0) {     
+        time_spent += at_least_time_needed;
+        position += at_least_time_needed;
+        position = min(position, (double)pos_time[i].first);
+      }
+      
+      double ith_position = pos_time[i].first + pos_time[i].second - time_spent;
+      ith_position = max(ith_position, position);
+      double time_needed = (ith_position - position) / 2.0;
+      time_spent += time_needed;
+      position += time_needed;
+    }
+    
+    cout << fixed << setprecision(6) << position << endl;
+  }
+}
