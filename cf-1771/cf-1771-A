@@ -1,0 +1,81 @@
+// problem
+Hossam woke up bored, so he decided to create an interesting array with his friend Hazem.Now, they have an array 𝑎 of 𝑛 positive integers, Hossam will choose a number 𝑎𝑖 and Hazem will choose a number 𝑎j.
+
+Count the number of interesting pairs (𝑎𝑖,𝑎𝑗) that meet all the following conditions:
+
+    1≤𝑖,𝑗≤𝑛;
+    𝑖≠𝑗;
+    The absolute difference |𝑎𝑖−𝑎𝑗| must be equal to the maximum absolute difference over all the pairs in the array. More formally, |𝑎𝑖−𝑎𝑗|=max1≤𝑝,𝑞≤𝑛|𝑎𝑝−𝑎𝑞|.
+
+// Input
+The input consists of multiple test cases. The first line contains a single integer 𝑡(1≤𝑡≤100), which denotes the number of test cases. Description of the test cases follows.
+
+The first line of each test case contains an integer 𝑛(2≤𝑛≤10^5).
+
+The second line of each test case contains 𝑛 integers 𝑎1,𝑎2,…,𝑎𝑛 (1≤𝑎𝑖≤10^5).
+
+It is guaranteed that the sum of 𝑛 over all test cases does not exceed 10^5.
+
+// Output
+
+For each test case print an integer — the number of interesting pairs (𝑎𝑖,𝑎𝑗).
+
+// Example
+// Input
+2
+5
+6 2 3 8 1
+6
+7 2 8 3 2 10
+
+// Output
+2
+4
+
+// Solution
+#include <bits/stdc++.h>
+#define ll long long
+
+using namespace std;
+
+int main() {
+  int t;
+  cin >> t;
+  while (t--) {
+    int n;
+    cin >> n;
+    
+    ll n_max = 0;
+    ll n_min = 0;
+    
+    int max_val = -1;
+    int min_val = 1000000;
+    
+    for (int i = 0; i < n; ++i) {
+      int val;
+      cin >> val;
+      
+      if (min_val == val) {
+        n_min++;
+      } else if(min_val > val) {
+        min_val = val;
+        n_min = 1;
+      }
+      
+      if (max_val == val) {
+        n_max++;
+      } else if(max_val < val) {
+        max_val = val;
+        n_max = 1;
+      }
+    }
+    
+    if (max_val == min_val) {
+      cout << ((ll)n * (n-1)) << endl;
+      continue;
+    }
+    cout << n_min * n_max * 2 << endl;
+  }
+  
+  return 0;
+}
