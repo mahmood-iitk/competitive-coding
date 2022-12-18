@@ -1,0 +1,106 @@
+// Problem
+An array 𝑏 of 𝑚 positive integers is good if for all pairs 𝑖 and 𝑗 (1≤𝑖,𝑗≤𝑚), max(𝑏𝑖,𝑏𝑗) is divisible by min(𝑏𝑖,𝑏𝑗).
+
+You are given an array 𝑎 of 𝑛 positive integers. You can perform the following operation:
+
+    Select an index 𝑖 (1≤𝑖≤𝑛) and an integer 𝑥 (0≤𝑥≤𝑎𝑖) and add 𝑥 to 𝑎𝑖, in other words, 𝑎𝑖:=𝑎𝑖+𝑥. After this operation, 𝑎𝑖≤1018 should be satisfied. 
+
+You have to construct a sequence of at most 𝑛 operations that will make 𝑎 good. It can be proven that under the constraints of the problem, such a sequence of operations always exists.
+
+// Input
+
+Each test contains multiple test cases. The first line contains a single integer 𝑡 (1≤𝑡≤10^4) — the number of test cases. The description of the test cases follows.
+
+The first line of each test case contains a single integer 𝑛 (1≤𝑛≤10^5) — the length of the array 𝑎.
+
+The second line of each test case contains 𝑛 space-separated integers 𝑎1,𝑎2,…,𝑎𝑛 (1≤𝑎𝑖≤10^9) — representing the array 𝑎.
+
+It is guaranteed that the sum of 𝑛 over all test cases does not exceed 10^5.
+
+// Output
+
+For each test, output a single integer p(0≤𝑝≤𝑛) — denoting the number of operations in your solution.
+
+In each of the following 𝑝 lines, output two space-separated integers — 𝑖 and 𝑥.
+
+You do not need to minimize the number of operations. It can be proven that a solution always exists.
+
+// Example
+// Input
+4
+4
+2 3 5 5
+2
+4 8
+5
+3 4 343 5 6
+3
+31 5 17
+
+// Output
+4
+1 2
+1 1
+2 2
+3 0
+0
+5
+1 3
+1 4
+2 1
+5 4
+3 7
+3
+1 29
+2 5
+3 3
+
+
+// Solution
+#include <bits/stdc++.h>
+#define ll long long
+
+using namespace std;
+
+ll vector_ceil(vector<ll> vec, ll val) {
+  vector<ll>::iterator it = lower_bound(
+    vec.begin(), vec.end(), val);
+  // cout << *it <<endl;
+  // if (*it == val) {
+  //   return *it;
+  // }
+  // it++;
+  return *it;
+}
+
+int main() {
+  int t;
+  cin >> t;
+  while (t--) {
+    int n;
+    cin >> n;
+    
+    vector<ll> vec(n);
+    for (int i = 0; i < n; ++i) {
+      cin >> vec[i];
+    }
+    
+    ll min_ele = *min_element(vec.begin(), vec.end());
+    
+    vector<ll> min_ele_powers;
+    min_ele_powers.push_back(min_ele);
+    while (min_ele_powers.back() < 10000000000ll) {
+      min_ele_powers.push_back(2 * min_ele_powers.back());
+    }    
+    
+    cout << n << endl;
+    for (int i = 0; i < n; ++i) {
+      ll val = vec[i];
+      ll vceil = vector_ceil(min_ele_powers, val);
+      // cout << vceil << endl;
+      cout << i + 1 << " " << vceil - val << endl;
+    }
+  }
+  return 0;
+}
+
