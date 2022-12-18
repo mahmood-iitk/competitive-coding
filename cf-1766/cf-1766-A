@@ -1,0 +1,59 @@
+// Problem
+Let's call a positive integer extremely round if it has only one non-zero digit. For example, 5000, 4, 1, 10, 200 are extremely round integers; 42, 13, 666, 77, 101 are not.
+
+You are given an integer n. You have to calculate the number of extremely round integers 𝑥 such that 1≤𝑥≤𝑛.
+
+// Input
+
+The first line contains one integer 𝑡(1≤𝑡≤10^4) — the number of test cases.
+
+Then, 𝑡 lines follow. The 𝑖-th of them contains one integer 𝑛 (1≤𝑛≤999999) — the description of the 𝑖-th test case.
+
+// Output
+
+For each test case, print one integer — the number of extremely round integers 𝑥 such that 1≤𝑥≤𝑛.
+
+// Example
+// Input
+5
+9
+42
+13
+100
+111
+
+// Output
+9
+13
+10
+19
+19
+
+
+// SOlution
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+  int t;
+  cin >> t;
+  while (t--) {
+    int n;
+    cin >> n;
+    
+    int res = 0;
+    int num_digits = 1;
+    int msd = n;
+    while (msd > 9) {
+      num_digits++;
+      msd = msd / 10;
+    }
+    
+    res += (num_digits - 1) * 9 + msd;
+    
+    cout << res << endl;
+  }
+  
+  return 0;
+}
