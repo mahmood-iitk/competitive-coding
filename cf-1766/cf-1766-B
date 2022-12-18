@@ -1,0 +1,87 @@
+// Problem
+You want to type the string 𝑠, consisting of 𝑛 lowercase Latin letters, using your favorite text editor Notepad#.
+
+Notepad# supports two kinds of operations:
+
+    append any letter to the end of the string;
+    copy a continuous substring of an already typed string and paste this substring to the end of the string. 
+
+Can you type string 𝑠 in strictly less than 𝑛 operations?
+
+// Input
+
+The first line contains a single integer 𝑡 (1≤𝑡≤10^4) — the number of testcases.
+
+The first line of each testcase contains a single integer 𝑛 (1≤𝑛≤2⋅10^5) — the length of the string 𝑠.
+
+The second line contains a string 𝑠, consisting of 𝑛 lowercase Latin letters.
+
+The sum of 𝑛 doesn't exceed 2⋅10^5 over all testcases.
+
+// Output
+
+For each testcase, print "YES" if you can type string 𝑠 in strictly less than 𝑛 operations. Otherwise, print "NO".
+
+// Example
+// Input
+6
+10
+codeforces
+8
+labacaba
+5
+uohhh
+16
+isthissuffixtree
+1
+x
+4
+momo
+
+// Output
+NO
+YES
+NO
+YES
+NO
+YES
+
+
+// Solution
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+  int t;
+  cin >> t;
+  while (t--) {
+    int n;
+    cin >> n;
+    string str;
+    cin >> str;
+    
+    map<string, set<int>> pair_to_ind_map;
+    for (int i = 0; i < n-1; ++i) {
+      pair_to_ind_map[str.substr(i, 2)].emplace(i);
+    }
+    bool res = false;
+    for (auto it = pair_to_ind_map.begin(); it != pair_to_ind_map.end(); ++it) {
+      if (it->second.size() <= 1) {
+        continue;
+      }
+      int first_ind = *(it->second.begin());
+      int last_ind = *(it->second.rbegin());
+      if (last_ind - first_ind > 1) {
+        res = true;
+        break;
+      }
+    }
+    if (res) {
+      cout << "YES\n";
+    } else {
+      cout << "NO\n";
+    }
+  }
+  return 0;
+}
