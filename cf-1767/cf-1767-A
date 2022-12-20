@@ -1,0 +1,93 @@
+// Problem
+You are given a non-degenerate triangle (a non-degenerate triangle is a triangle with positive area). The vertices of the triangle have coordinates (𝑥1,𝑦1), (𝑥2,𝑦2) and (𝑥3,𝑦3).
+
+You want to draw a straight line to cut the triangle into two non-degenerate triangles. Furthermore, the line you draw should be either horizontal or vertical.
+
+Can you draw the line to meet all the constraints?
+
+Here are some suitable ways to draw the line:
+
+However, these ways to draw the line are not suitable (the first line cuts the triangle into a triangle and a quadrangle; the second line doesn't cut the triangle at all; the third line is neither horizontal nor vertical):
+// Input
+
+The first line contains one integer 𝑡 (1≤𝑡≤10^4) — the number of test cases.
+
+Each test case consists of four lines. The first of them is empty. The 𝑖-th of the next three lines contains two integers 𝑥𝑖 and 𝑦𝑖 (1≤𝑥𝑖,𝑦𝑖≤108) — the coordinates of the 𝑖-th vertex of the triangle.
+
+Additional constraint on the input: in each test case, the triangle formed by three vertices has positive area (i. e. it is non-degenerate).
+// Output
+
+For each test case, print YES if it is possible to cut the triangle according to the statement, or NO otherwise. You may print each letter in any case (YES, yes, Yes will all be recognized as positive answer, NO, no and nO will all be recognized as negative answer).
+// Example
+// Input
+4
+
+4 7
+6 8
+3 5
+
+4 5
+4 7
+6 8
+
+5 8
+1 8
+2 5
+
+3 6
+6 6
+6 3
+
+// Output
+YES
+YES
+YES
+NO
+
+// Solution
+#include <bits/stdc++.h>
+#define ll long long
+
+using namespace std;
+
+bool is_horizontal_or_vertical(
+  ll x1, ll y1, ll x2, ll y2) {
+  
+  return (y1 == y2) or (x1 == x2);
+}
+
+
+
+bool is_right_triangle(
+  int x1, int y1,
+  int x2, int y2,
+  int x3, int y3) {
+  
+  vector<ll> vec(3);
+  vec[0] = is_horizontal_or_vertical(x1, y1, x2, y2);
+  vec[1] = is_horizontal_or_vertical(x1, y1, x3, y3);
+  vec[2] = is_horizontal_or_vertical(x3, y3, x2, y2);
+  // cout << vec[0] << " " << vec[1] << " " << vec[2] << endl;
+  
+  // sort(vec.begin(), vec.end());
+  
+  return (vec[0] + vec[1]  + vec[2]) == 2;
+}
+
+int main() {
+  int t;
+  cin >> t;
+  while (t--) {
+    int x1, y1, x2, y2, x3, y3;
+    cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
+    
+    if (is_right_triangle(x1, y1, x2, y2, x3, y3)) {
+      cout << "NO";      
+    } else {
+      cout << "YES";
+    }
+    cout << endl;
+    
+  }
+  return 0;
+}
