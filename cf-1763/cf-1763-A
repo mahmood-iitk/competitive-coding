@@ -1,0 +1,80 @@
+// Problem
+You are given an array 𝑎 of length 𝑛. You can perform the following operation several (possibly, zero) times:
+
+    Choose 𝑖, 𝑗, 𝑏: Swap the 𝑏-th digit in the binary representation of 𝑎𝑖 and 𝑎𝑗. 
+
+Find the maximum possible value of max(𝑎)−min(𝑎).
+
+In a binary representation, bits are numbered from right (least significant) to left (most significant). Consider that there are an infinite number of leading zero bits at the beginning of any binary representation.
+
+For example, swap the 0-th bit for 4=1002 and 3=112 will result 1012=5 and 102=2. Swap the 2-nd bit for 4=1002 and 3=112 will result 0002=02=0 and 1112=7.
+
+Here, max(𝑎)denotes the maximum element of array 𝑎 and min(𝑎) denotes the minimum element of array 𝑎.
+
+The binary representation of 𝑥 is 𝑥 written in base 2. For example, 9 and 6 written in base 2 are 1001 and 110, respectively.
+
+// Input
+
+The first line contains a single integer 𝑡(1≤𝑡≤128) — the number of testcases.
+
+The first line of each test case contains a single integer 𝑛(3≤𝑛≤512) — the length of array 𝑎.
+
+The second line of each test case contains 𝑛 integers 𝑎1,𝑎2,…,𝑎𝑛 (0≤𝑎𝑖<1024) — the elements of array 𝑎.
+
+It's guaranteed that the sum of 𝑛 over all testcases does not exceed 512.
+
+// Output
+
+For each testcase, print one integer — the maximum possible value of max(𝑎)−min(𝑎).
+
+// Example
+// Input
+4
+3
+1 0 1
+4
+5 5 5 5
+5
+1 2 3 4 5
+7
+20 85 100 41 76 49 36
+
+// Output
+1
+0
+7
+125
+
+
+// Solution
+#include <bits/stdc++.h>
+
+using namespaec std;
+
+int main() {
+  int t;
+  cin >> t;
+  
+  while (t--) {
+    int n;
+    cin >> n;
+    
+    int max = -1;
+    int min = -1;
+    
+    for (int i = 0 ; i < n; ++i) {
+      int val;
+      cin >> val;
+      if (max == -1) {
+        max = val;
+        min = val;
+        continue;
+      }
+      
+      max = max | val;
+      min = min & val;
+    }
+    cout << max - min << endl;
+  }
+  return 0;
+}
