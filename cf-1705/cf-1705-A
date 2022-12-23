@@ -1,0 +1,70 @@
+// Problem
+Mark is asked to take a group photo of 2𝑛 people. The 𝑖-th person has height ℎ𝑖 units.
+
+To do so, he ordered these people into two rows, the front row and the back row, each consisting of 𝑛
+people. However, to ensure that everyone is seen properly, the 𝑗-th person of the back row must be at least 𝑥 units taller than the 𝑗-th person of the front row for each 𝑗 between 1 and 𝑛, inclusive.
+
+Help Mark determine if this is possible.
+
+// Input
+
+The first line contains one integer 𝑡(1≤𝑡≤100) — the number of test cases. Each test case consists of two lines.
+
+The first line of each test case contains two positive integers 𝑛 and 𝑥 (1≤𝑛≤100, 1≤𝑥≤10^3) — the number of people in each row and the minimum difference Mark wants.
+
+The second line of each test case contains 2𝑛 positive integers ℎ1,ℎ2,…,ℎ2𝑛 (1≤ℎ𝑖≤10^3) — the height of each person in units.
+
+Note that the sum of 𝑛 over all test cases is not bounded.
+
+// Output
+
+For each test case, print a single line containing "YES" if Mark could arrange people satisfying his condition and "NO" otherwise.
+
+You may print each letter in any case (for example, YES, Yes, yes, yEs will all be recognized as positive answers).
+
+// Example
+// Input
+3
+3 6
+1 3 9 10 12 16
+3 1
+2 5 2 2 2 5
+1 2
+8 6
+
+// Output
+YES
+NO
+YES
+
+
+// Solution
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+  int t;
+  cin >> t;
+  while (t--) {
+    int n, x;
+    cin >> n >> x;
+    
+    int m = 2 * n;
+    vector<int> vec(m);
+    for (int i = 0; i < m; ++i) {
+      cin >> vec[i];
+    }
+    
+    sort(vec.begin(), vec.end());
+    
+    bool res = true;
+    for (int i = 0; i < n; ++i) {
+      res = res & (vec[i] + x <= vec[i + n]);
+    }
+    
+    cout << (res ? "YES" : "NO") << endl;
+  }
+  
+  return 0;
+}
