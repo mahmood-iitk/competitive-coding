@@ -1,0 +1,119 @@
+// Problem
+You have a sequence of 𝑛 colored blocks. The color of the 𝑖-th block is 𝑐𝑖, an integer between 1 and 𝑛.
+
+You will place the blocks down in sequence on an infinite coordinate grid in the following way.
+
+    Initially, you place block 1 at (0,0).
+    For 2≤𝑖≤𝑛, if the (𝑖−1)-th block is placed at position (𝑥,𝑦), then the 𝑖-th block can be placed at one of positions (𝑥+1,𝑦), (𝑥−1,𝑦), (𝑥,𝑦+1) (but not at position (𝑥,𝑦−1)), as long no previous block was placed at that position. 
+
+A tower is formed by 𝑠 blocks such that they are placed at positions (𝑥,𝑦),(𝑥,𝑦+1),…,(𝑥,𝑦+𝑠−1) for some position (𝑥,𝑦) and integer 𝑠. The size of the tower is 𝑠, the number of blocks in it. A tower of color 𝑟 is a tower such that all blocks in it have the color 𝑟.
+
+For each color 𝑟 from 1 to 𝑛, solve the following problem independently:
+
+    Find the maximum size of a tower of color 𝑟 that you can form by placing down the blocks according to the rules. 
+
+// Input
+
+The first line contains a single integer 𝑡 (1≤𝑡≤10^4) — the number of test cases.
+
+The first line of each test case contains a single integer 𝑛 (1≤𝑛≤10^5).
+
+The second line of each test case contains 𝑛 integers 𝑐1,𝑐2,…,𝑐𝑛 (1≤𝑐𝑖≤𝑛).
+
+It is guaranteed that the sum of 𝑛 over all test cases does not exceed 2⋅10^5.
+
+// Output
+
+For each test case, output 𝑛 integers. The 𝑟-th of them should be the maximum size of an tower of color 𝑟 you can form by following the given rules. If you cannot form any tower of color 𝑟, the 𝑟-th integer should be 0.
+
+// Example
+// Input
+6
+7
+1 2 3 1 2 3 1
+6
+4 2 2 2 4 4
+1
+1
+5
+5 4 5 3 5
+6
+3 3 3 1 3 3
+8
+1 2 3 4 4 3 2 1
+
+// Output
+3 2 2 0 0 0 0 
+0 3 0 2 0 0 
+1 
+0 0 1 1 1 
+1 0 4 0 0 0 
+2 2 2 2 0 0 0 0 
+
+
+// Solution
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+  int t;
+  cin >> t;
+  
+  while (t--) {
+    int n;
+    cin >> n;
+    
+    vector<int> colors(n);
+    for (int i = 0; i < n; ++i) {
+      cin >> colors[i];
+    }
+    
+    vector<bool> both_sides_empty(n, true);
+    vector<int> placed_box_index(n, -1);
+    vector<int> tower_size(n, 0);
+    
+    for (int i = 0; i < n; ++i) {
+      int color = colors[i] - 1;
+      
+      if (placed_box_index[color] == -1) {
+        tower_size[color] = 1;
+        placed_box_index[color] = i;
+        continue;
+      }
+      
+      if (i - placed_box_index[color] == 1) {
+        both_sides_empty[color] = true;
+        tower_size[color]++;
+        placed_box_index[color] = i;
+        continue;
+      }
+      
+      if (i - placed_box_index[color] == 2) {
+        continue;
+      }
+      
+      // if (both_sides_empty[color]) {
+      //   both_sides_empty[color] = false;
+      //   tower_size[color]++;
+      //   placed_box_index[color] = i;
+      // }
+      
+      if ((i - placed_box_index[color]) % 2 == 0) {
+        continue;
+      }
+      
+      both_sides_empty[color] = false;
+      tower_size[color]++;
+      placed_box_index[color] = i;
+    }
+    
+    for (int i = 0; i < n; ++i) {
+      cout << tower_size[i] << " ";
+    }
+    
+    cout << endl;
+  }
+  
+  return 0;
+}
