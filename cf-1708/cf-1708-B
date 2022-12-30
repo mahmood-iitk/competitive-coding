@@ -1,0 +1,74 @@
+// Problem
+You are given three integers 𝑛, 𝑙, and 𝑟. You need to construct an array 𝑎1,𝑎2,…,𝑎𝑛 (𝑙≤𝑎𝑖≤𝑟) such that gcd(𝑖,𝑎𝑖) are all distinct or report there's no solution.
+
+Here gcd(𝑥,𝑦)denotes the greatest common divisor (GCD) of integers 𝑥 and 𝑦.
+
+// Input
+
+The input consists of multiple test cases. The first line contains a single integer 𝑡 (1≤𝑡≤10^4) — the number of test cases. The description of the test cases follows.
+
+The first line contains three integers 𝑛, 𝑙, 𝑟 (1≤𝑛≤10^5, 1≤𝑙≤𝑟≤10^9).
+
+It is guaranteed that the sum of 𝑛 over all test cases does not exceed 10^5.
+
+// Output
+
+For each test case, if there is no solution, print "NO" (without quotes). You can print letters in any case (upper or lower).
+
+Otherwise, print "YES" (without quotes). In the next line, print 𝑛 integers 𝑎1,𝑎2,…,𝑎𝑛 — the array you construct.
+
+If there are multiple solutions, you may output any.
+
+// Example
+// Input
+4
+5 1 5
+9 1000 2000
+10 30 35
+1 1000000000 1000000000
+
+// Output
+YES
+1 2 3 4 5
+YES
+1145 1926 1440 1220 1230 1350 1001 1000 1233
+NO
+YES
+1000000000
+
+
+// Solution
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+  int t;
+  cin >> t;
+  while (t--) {
+    int n, l, r;
+    cin >> n >> l >> r;
+    
+    vector<int> vec;
+    for (int i = 1; i <= n; ++i) {
+      int val = (i - (l % i))%i + l;
+      if (val > r) {
+        cout << "NO" << endl;
+        break;
+      }
+      vec.push_back(val);
+    }
+    
+    if (vec.size() < n) {
+      continue;
+    }
+    
+    cout << "YES" << endl;
+    for (const int i : vec) {
+      cout << i << " ";
+    }
+    cout << endl;
+  }
+  
+  return 0;
+}
