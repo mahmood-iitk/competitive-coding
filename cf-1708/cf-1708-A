@@ -1,0 +1,73 @@
+// Problem
+You are given an array 𝑎 consisting of 𝑛 positive integers.
+
+You are allowed to perform this operation any number of times (possibly, zero):
+
+    choose an index 𝑖 (2≤𝑖≤𝑛), and change 𝑎𝑖 to 𝑎𝑖−𝑎𝑖−1. 
+
+Is it possible to make 𝑎𝑖=0 for all 2≤𝑖≤n?
+
+// Input
+
+The input consists of multiple test cases. The first line contains a single integer 𝑡 (1≤𝑡≤100)  — the number of test cases. The description of the test cases follows.
+
+The first line contains one integer n(2≤𝑛≤100) — the length of array 𝑎.
+
+The second line contains 𝑛 integers 𝑎1,𝑎2,…,𝑎𝑛 (1≤𝑎𝑖≤10^9).
+
+// Output
+
+For each test case, print "YES" (without quotes), if it is possible to change 𝑎𝑖 to 0 for all 2≤𝑖≤𝑛 , and "NO" (without quotes) otherwise.
+
+You can print letters in any case (upper or lower).
+
+// Example
+// Input
+4
+2
+5 10
+3
+1 2 3
+4
+1 1 1 1
+9
+9 9 8 2 4 4 3 5 3
+
+// Output
+YES
+YES
+YES
+NO
+
+
+//  Solution
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+  int t;
+  cin >> t;
+  
+  while (t--) {
+    int n;
+    cin >> n;
+    
+    bool res = true;
+    
+    int val1;
+    cin >> val1;
+    n--;
+    
+    while(n--) {
+      int val;
+      cin >> val;
+      
+      res = res && (val % val1 == 0);  
+    }
+    
+    cout << (res ? "YES" : "NO") << endl;
+    
+  }
+  return 0;
+}
