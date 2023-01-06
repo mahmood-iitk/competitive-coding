@@ -1,0 +1,51 @@
+// Problem
+You are given an integer 𝑘. Find the largest integer 𝑥, where 1≤𝑥<𝑘, such that 𝑥!+(𝑥−1)!† is a multiple of ‡ 𝑘, or determine that no such 𝑥 exists.
+
+†
+𝑦! denotes the factorial of 𝑦, which is defined recursively as 𝑦!=𝑦⋅(𝑦−1)! for 𝑦≥1 with the base case of 0!=1. For example, 5!=5⋅4⋅3⋅2⋅1⋅0!=120.
+
+‡
+If 𝑎 and 𝑏 are integers, then 𝑎 is a multiple of 𝑏 if there exists an integer 𝑐 such that 𝑎=𝑏⋅𝑐. For example, 10 is a multiple of 5 but 9 is not a multiple of 6.
+
+// Input
+
+The first line contains a single integer 𝑡 (1≤𝑡≤10^4) — the number of test cases. The description of test cases follows.
+
+The only line of each test case contains a single integer 𝑘(2≤𝑘≤10^9).
+
+// Output
+
+For each test case output a single integer — the largest possible integer 𝑥 that satisfies the conditions above.
+
+If no such 𝑥 exists, output −1.
+
+// Example
+// Input
+4
+3
+6
+8
+10
+
+// Output
+2
+5
+7
+9
+
+
+// Solution
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+  int t;
+  cin >> t;
+  while (t--) {
+    int k;
+    cin >> k;
+    cout << k - 1 << endl;
+  }
+  return 0;
+}
