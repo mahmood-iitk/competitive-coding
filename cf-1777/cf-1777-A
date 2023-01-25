@@ -1,0 +1,63 @@
+// Problem
+An array 𝑎 is good if for all pairs of adjacent elements, 𝑎𝑖 and 𝑎𝑖+1 (1≤𝑖<𝑛) are of different parity. Note that an array of size 1 is trivially good.
+
+You are given an array of size 𝑛.
+
+In one operation you can select any pair of adjacent elements in which both elements are of the same parity, delete them, and insert their product in the same position.
+
+Find the minimum number of operations to form a good array.
+
+// Input
+
+Each test contains multiple test cases. The first line contains the number of test cases 𝑡
+(1≤𝑡≤500). The description of the test cases follows.
+
+The first line of each test case contains an integer 𝑛(1≤𝑛≤100).
+
+The second line of each test case contains 𝑛integers 𝑎1,𝑎2,…,𝑎𝑛 (1≤𝑎𝑖≤10^9).
+
+// Output
+
+For each test case print an integer, the minimum number of operations required to form a good array.
+
+//Example
+//Input
+3
+5
+1 7 11 2 13
+4
+1 2 3 4
+6
+1 1 1 2 2 3
+
+// Output
+2
+0
+3
+
+// Solution
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+  int t;
+  cin >> t;
+  while (t--) {
+    int n;
+    cin >> n;
+    
+    int res = 0;
+    int prev_num;
+    cin >> prev_num;
+    for (int i = 1; i < n; ++i) {
+      int num;
+      cin >> num;
+      if (num % 2 == prev_num % 2) {
+        res++;
+      }
+      prev_num = num;
+    }
+    cout << res << endl;
+  }
+}
