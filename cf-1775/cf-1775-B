@@ -1,0 +1,112 @@
+// Problem
+The gardener Kazimir Kazimirovich has an array of 𝑛 integers 𝑐1,𝑐2,…,𝑐𝑛.
+
+He wants to check if there are two different subsequences 𝑎 and 𝑏 of the original array, for which 𝑓(𝑎)=𝑓(𝑏), where 𝑓(𝑥) is the bitwise OR of all of the numbers in the sequence 𝑥.
+
+A sequence 𝑞 is a subsequence of 𝑝 if 𝑞 can be obtained from 𝑝 by deleting several (possibly none or all) elements.
+
+Two subsequences are considered different if the sets of indexes of their elements in the original sequence are different, that is, the values of the elements are not considered when comparing the subsequences.
+
+// Input
+
+Each test contains multiple test cases. The first line contains the number of test cases 𝑡 (1≤𝑡≤10^5). The description of the test cases follows.
+
+The first line of each test case contains one integer 𝑛 (1≤𝑛≤10^5) — the size of the array 𝑐.
+
+The description of the array 𝑐 in this problem is given implicitly to speed up input.
+
+The (𝑖+1)-st of the following 𝑛 lines of the test case begins with an integer 𝑘𝑖 (1≤𝑘𝑖≤10^5) — the number of set bits in the number 𝑐𝑖. Next follow 𝑘𝑖 distinct integers 𝑝𝑖,1,𝑝𝑖,2,…,𝑝𝑖,𝑘𝑖 (1≤𝑝𝑖≤2⋅10^5) —the numbers of bits that are set to one in number 𝑐𝑖. In other words, 𝑐𝑖=2^(𝑝𝑖,1) + 2^(𝑝𝑖,2) + … + 2^(𝑝𝑖,𝑘𝑖).
+
+It is guaranteed that the total sum of 𝑘𝑖 in all tests does not exceed 10^5.
+
+// Output
+
+For each set of input, print "Yes" if there exist two different subsequences for which 𝑓(𝑎)=𝑓(𝑏), and "No" otherwise.
+
+You can output the answer in any case (upper or lower). For example, the strings "yEs", "yes", "Yes", and "YES" will be recognized as positive responses.
+
+// Example
+// Input
+5
+3
+2 1 5
+2 2 4
+2 2 3
+2
+2 1 2
+1 2
+4
+3 1 2 4
+2 2 4
+4 1 2 5 6
+2 2 5
+5
+3 3 1 2
+3 2 5 3
+5 7 2 3 1 4
+5 1 2 6 3 5
+3 2 6 3
+2
+1 1
+1 2
+
+// Output
+No
+Yes
+Yes
+Yes
+No
+
+// Solution
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+  int t;
+  cin >> t;
+  while (t--) {
+    int n;
+    cin >> n;
+    bool res = false;
+    
+    vector<vector<int>> vec;
+    for (int i = 0; i < n; ++i) {
+      int k;
+      cin >> k;
+      vector<int> int_vec(k);
+      for (int j = 0; j < k; j++) {
+        cin >> int_vec[j];
+      }
+      vec.push_back(int_vec);
+    }
+    
+    map<int, int> bit_to_count;
+    for (int i = 0; i < n; ++i) {
+      for (const int val : vec[i]) {
+        bit_to_count[val]++;
+      }
+    }
+    
+    for (int i = 0; i < n; ++i) {
+      bool all_bits_already_set = true;
+      for (const int val : vec[i]) {
+        if (bit_to_count[val] == 1) {
+          all_bits_already_set = false;
+        }
+      }
+      if (all_bits_already_set) {
+        res = true;
+      }
+    }
+    
+    if (res) {
+      cout << "YES";
+    } else {
+      cout << "no";
+    }
+    cout << endl;
+  }
+  
+  return 0;
+}
