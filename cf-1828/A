@@ -1,0 +1,58 @@
+You are given a positive integer 𝑛. Please find an array 𝑎1,𝑎2,…,𝑎𝑛 that is perfect.
+
+A perfect array 𝑎1,𝑎2,…,𝑎𝑛 satisfies the following criteria:
+1≤𝑎𝑖≤1000 for all 1≤𝑖≤𝑛.
+𝑎𝑖 is divisible by 𝑖 for all 1≤𝑖≤𝑛.
+𝑎1+𝑎2+…+𝑎𝑛 is divisible by 𝑛. 
+
+Input
+
+Each test contains multiple test cases. The first line contains the number of test cases 𝑡(1≤𝑡≤200). The description of the test cases follows.
+
+The only line of each test case contains a single positive integer 𝑛 (1≤𝑛≤200) — the length of the array 𝑎.
+
+Output
+
+For each test case, output an array 𝑎1,𝑎2,…,𝑎𝑛 that is perfect.
+
+We can show that an answer always exists. If there are multiple solutions, print any.
+Example
+Input
+
+7
+1
+2
+3
+4
+5
+6
+7
+
+Output
+
+1
+2 4
+1 2 3
+2 8 6 4
+3 4 9 4 5
+1 10 18 8 5 36
+3 6 21 24 10 6 14
+
+
+#include <bits/stdc++.h>
+#define ll long long
+
+using namespace std;
+
+int main() {
+  int t;
+  cin >> t;
+  while (t--) {
+    int n;
+    cin >> n;
+    for (int i = 1; i <= n; ++i) {
+      cout << 2 * i << " ";
+    }
+    cout << endl;
+  }
+}
