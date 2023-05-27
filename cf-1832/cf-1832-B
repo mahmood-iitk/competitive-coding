@@ -1,0 +1,101 @@
+You are given an array 𝑎1,𝑎2,…,𝑎𝑛, where all elements are different.
+
+You have to perform exactly 𝑘 operations with it. During each operation, you do exactly one of the
+following two actions (you choose which to do yourself):
+
+    find two minimum elements in the array, and delete them;
+    find the maximum element in the array, and delete it. 
+
+You have to calculate the maximum possible sum of elements in the resulting array.
+
+Input
+
+The first line contains one integer 𝑡(1≤𝑡≤10^4) — the number of test cases.
+
+Each test case consists of two lines:
+
+    the first line contains two integers 𝑛and 𝑘 (3≤𝑛≤2⋅10^5; 1≤𝑘≤99999; 2𝑘<𝑛) — the number of elements and
+    operations, respectively. the second line contains 𝑛integers 𝑎1,𝑎2,…,𝑎𝑛 (1≤𝑎𝑖≤10^9; all 𝑎𝑖 are different) — 
+    the elements of the array. 
+
+Additional constraint on the input: the sum of 𝑛 does not exceed 2⋅10^5.
+
+Output
+
+For each test case, print one integer — the maximum possible sum of elements in the resulting array.
+Example
+Input
+
+6
+5 1
+2 5 1 10 6
+5 2
+2 5 1 10 6
+3 1
+1 2 3
+6 1
+15 22 12 10 13 11
+6 2
+15 22 12 10 13 11
+5 1
+999999996 999999999 999999997 999999998 999999995
+
+Output
+
+21
+11
+3
+62
+46
+3999999986
+
+
+
+#include <bits/stdc++.h>
+#define ll long long
+#define MOD 1000000007
+
+using namespace std;
+
+int main() {
+  int t;
+  cin >> t;
+  
+  while (t--) {
+    int n, k;
+    cin >> n >> k;
+    
+    int a[n];
+    for (int i = 0; i < n; ++i) {
+      cin >> a[i];
+    }
+    
+    sort(a, a + n);
+    
+    int i = 0;
+    int j = n - k - 1;
+    
+    
+    ll sum = 0;
+    for (int l = i; l <= j; l++) {
+      sum += a[l];
+    }
+    
+    ll res = sum;
+    for (int l = j + 1; l < n; l++, i = i + 2) {
+      sum += (a[l] - a[i] - a[i+1]);
+      res = max(res, sum);
+    }
+    cout << res << endl;
+  }
+}
+
+
+/*
+2 5 1 10 6
+1 2 5 6 10
+sum = 14
+24 - 3 = 21
+
+*/
+
